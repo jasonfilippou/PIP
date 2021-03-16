@@ -5,6 +5,8 @@
 A collection of interview problems mined from HackerRank, LeetCode and other
 sources, with Python implementations.
 
+Check [this repo](https://github.com/jasonfilippou/JIP) for interview problem solutions in Java!
+
 ### System specs
 
 The problems have been compiled and run on Windows and Mac machines, running Pycharm
