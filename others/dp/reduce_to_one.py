@@ -22,25 +22,6 @@
 
 def min_steps(n):
     min_steps = [0 for _ in range(n + 1)]  # I don't want to use steps[0], and I *do* want to use steps[n]
-    min_steps[1] = 0
-    min_steps[2] = 1  # Either subtracting 1 or div by 2
-    min_steps[3] = 1  # By div by 3
-    if 0 < n < 4:
-        return min_steps[n]
-    for i in range(4, n + 1):
-        if i % 6 == 0:  # Div by 6? More than 2 options
-            min_steps[i] = 1 + min(min_steps[i // 3], min_steps[i // 2], min_steps[i - 1])
-        elif i % 3 == 0:  # By 3, but not by 2
-            min_steps[i] = 1 + min(min_steps[i // 3], min_steps[i - 1])
-        elif i % 2 == 0:  # By 2, but not by 3
-            min_steps[i] = 1 + min(min_steps[i // 2], min_steps[i - 1])
-        else:
-            min_steps[i] = 1 + min_steps[i - 1]  # No other options
-    return min_steps[n]
-
-
-def min_steps_with_solution(n):
-    min_steps = [0 for _ in range(n + 1)]  # I don't want to use steps[0], and I *do* want to use steps[n]
     num_in_step = [0 for _ in range(len(min_steps))]    # num_in_step[i] = the integer that we will reach after we apply the operation selected
     min_steps[1] = 0  # Nothing to do
     min_steps[2] = 1  # Either subtracting 1 or div by 2
@@ -93,5 +74,5 @@ def _backtrace(array):
 
 if __name__ == '__main__':
     for num in [4, 10, 15, 22, 40]:
-        num_min_steps, min_sol = min_steps_with_solution(num)
+        num_min_steps, min_sol = min_steps(num)
         print(f"{num} can be reduced to 1 in {num_min_steps} steps: {min_sol}")
