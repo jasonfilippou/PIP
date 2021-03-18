@@ -18,7 +18,7 @@ def permute(a, l, r):
             permute(a, l + 1, r)     # rec call
             a[l], a[i] = a[i], a[l]  # unswap to backtrack to the other choices.
 
-
+ 
 if __name__ == '__main__':
     # Driver program to test the above function
     string = "ABC"
