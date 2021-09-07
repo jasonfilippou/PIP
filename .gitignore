@@ -127,6 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/live_practice/
+
+# Others
 /others/hopper.py
-/live_practice/
+

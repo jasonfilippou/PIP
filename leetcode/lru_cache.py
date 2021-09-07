@@ -2,7 +2,7 @@
 Python implementation of Leetcode Question #146:
 https://leetcode.com/problems/lru-cache/
 
-The implementation of LRUCache is based in a combination of a doubly-linked list, as well as a hash map that maps
+The implementation of LRUCache is based in a combination of a circular list, as well as a hash map that maps
 the keys to nodes inside the list. The nodes contain the values.
 """
 
@@ -13,10 +13,10 @@ class LRUCache:
     # Inner class for Doubly Linked List Node #
     ###########################################
 
-    class _DLNode:
+    class _CLNode:
 
         ############################
-        # Constructor for _DLNode: #
+        # Constructor for _CLNode: #
         ############################
         def __init__(self, key=None, value=None):
             self.key = key
@@ -39,14 +39,14 @@ class LRUCache:
     ##################
 
     def _prepare_list(self) -> None:
-        self._head = self._DLNode()  # dummy node
-        self._tail = self._DLNode()  # dummy node
+        self._head = self._CLNode()  # dummy node
+        self._tail = self._CLNode()  # dummy node
         self._head.next = self._tail
         self._head.prev = self._tail
         self._tail.next = self._head
         self._tail.prev = self._head
 
-    def _move_to_head(self, node: _DLNode) -> None:
+    def _move_to_head(self, node: _CLNode) -> None:
         if node.prev is not None:
             node.prev.next = node.next
         if node.next is not None:
@@ -56,7 +56,7 @@ class LRUCache:
         self._head.next.prev = node
         self._head.next = node
 
-    def _pop_from_tail(self) -> _DLNode:
+    def _pop_from_tail(self) -> _CLNode:
         assert self._num_elements > 0, "You cannot pop the tail of an empty list!"
         lru_el = self._tail.prev
         lru_el.prev.next = lru_el.next            # tail
@@ -64,7 +64,7 @@ class LRUCache:
         return lru_el
 
     def _add_to_head(self, key, value) -> None:
-        node = self._DLNode(key, value)
+        node = self._CLNode(key, value)
         self._move_to_head(node)
 
     ##################################
@@ -87,7 +87,7 @@ class LRUCache:
                 del self._cache[lru_el.key]                                     # Also O(1), because hash function.
             else:
                 self._num_elements = self._num_elements + 1                     # Increase only if not at capacity.
-            new_node = self._DLNode(key, value)
+            new_node = self._CLNode(key, value)
             self._cache[key] = new_node                                         # O(1)
             self._move_to_head(new_node)                                        # Most recently used object always moves up front
         else:
