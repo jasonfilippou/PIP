@@ -1,13 +1,12 @@
-# https://leetcode.com/problems/validate-binary-search-tree/
-#
-#
-#     A naive recursive solution might blow up the stack, because I have as many as 10,000 nodes.
-#  I will therefore need an approach based on my own stack. Every time I go to the left, I push the child in the stack,
-#  updating the current right bound to the current node's value while maintaining the left (small) bound that I was pushed with.
-#  Respectively, when I go to the right, I update the  current left (small) bound to the current node's value, while maintaining
-#  the right (large) bound that I was pushed with.
-#
-#
+"""
+https://leetcode.com/problems/validate-binary-search-tree/
+
+A naive recursive solution might blow up the stack, because I have as many as 10,000 nodes.
+I will therefore need an approach based on my own stack. Every time I go to the left, I push the child in the stack,
+updating the current right bound to the current node's value while maintaining the left (small) bound that I was pushed with.
+Respectively, when I go to the right, I update the  current left (small) bound to the current node's value, while maintaining
+the right (large) bound that I was pushed with.
+"""
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
