@@ -1,28 +1,35 @@
 from typing import List
 
+def skip_skip_action_template(arr:List[int]):
+    l, r = 0, 0
+    while l <= r:
+        if mustSkip(l, arr):
+            l += 1
+        elif mustSkip(r, arr):
+            r -= 1
+        else:
+            action()
+            l += 1
+            r -= 1
 
-def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
-    results = []
+def compare_action_advance_template(arr1:List[int], arr2: List[int]):           # This one needs 2 iterables
+    i, j = 0, 0
+    while i < len(arr1) and j < len(arr2):
+        if behind(i, j):
+            action1()
+            i += 1
+        elif behind(j, i)
+            action2()
+            j += 1
+        else:
+            action3()
+            i += 1
+            j += 1
 
-    def _backtrack(remain, comb, start):
-        if remain == 0:
-            results.append(comb)
-            return
-        elif remain < 0:
-            # exceed the scope, stop exploration.
-            return
-
-        # The presence of the parameter "start" instead of the constant '0' is what makes this avoid duplicates.
-        for i in range(start, len(candidates)):
-            # give the current number another chance, rather than moving on
-            _backtrack(remain - candidates[i], comb + [candidates[i]], i)
-
-    _backtrack(target, [], 0)
-
-    return results
-
-
-if __name__ == '__main__':
-    print(combinationSum([2, 3, 6, 7], 7))
-    print(combinationSum([2, 3, 5], 8))
-    print(combinationSum([2], 1))
+def read_write_template(arr:List[int]):
+    wp, rp = 0, 0
+    while rp < len(arr):
+        if must_write(rp, arr):
+            arr[wp] = arr[rp]
+            wp += 1
+        rp += 1
